@@ -9,7 +9,7 @@ form.addEventListener("submit", async (e) => {
         message: document.getElementById("message").value,
     };
 
-    const response = await fetch("http://localhost:5000/contact", {
+    const response = await fetch("https://portfolio-backend-d523.onrender.com", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
