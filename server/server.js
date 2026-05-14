@@ -14,18 +14,31 @@ mongoose.connect(process.env.MONGO_URI)
 .then(() => console.log("MongoDB Connected"))
 .catch((err) => console.log(err));
 
+app.get("/", (req, res) => {
+    res.send("Portfolio Backend Running");
+});
+
 app.post("/contact", async (req, res) => {
     try {
-        const contact = new Contact(req.body);
+
+        const contact = new Contact({
+            name: req.body.name,
+            email: req.body.email,
+            message: req.body.message
+        });
+
         await contact.save();
 
         res.json({
             message: "Message Saved Successfully"
         });
-    }
-    catch (error) {
+
+    } catch (error) {
+
+        console.log(error);
+
         res.status(500).json({
-            message: "Error"
+            message: "Error Saving Message"
         });
     }
 });
